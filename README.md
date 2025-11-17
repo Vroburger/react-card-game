@@ -1,3 +1,62 @@
+# Card Game Project – Setup Guide
+
+This project uses **Next.js (App Router)**, **Prisma**, and **SQLite**.  
+Follow these steps after cloning the repository to get everything working.
+
+
+## 🚀 1. Install dependencies
+
+Inside the terminal:
+npm install
+
+
+## 🗄️ 2. Create a .env file
+
+Create a file named .env in the project root:
+
+(Make sure the path matches your local folder structure.)
+Example:
+DATABASE_URL="file:./prisma/dev.db"
+
+
+## 🔧 3. Generate the Prisma client
+
+npx prisma generate
+
+
+## 📊 5. Open Prisma Studio (optional)
+
+If you want a UI to view user data, cards, and user-card relations:
+npx prisma studio
+
+
+## ▶️ 6. Start the development server
+
+npm run dev
+
+App will run at:
+http://localhost:3000
+(Currently http://localhost:3000/players/1
+
+
+
+
+
+
+
+
+
+_______________________________________________________________________________________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
