@@ -4,9 +4,21 @@ import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headless
 import { motion, AnimatePresence } from 'framer-motion'
 import { Check, ChevronDown } from 'lucide-react'
 import rarityColor from '@/lib/colours'
+import { CardDefinition } from '@/data/cards'
+
+// Props for the dropdown
+interface CardDropdownProps {
+  cards: CardDefinition[]
+  selectedCard: number | null
+  setSelectedCard: (id: number | null) => void
+}
 
 // Card Dropdown Component
-export default function CardDropdown({ cards, selectedCard, setSelectedCard }: any) {
+export default function CardDropdown({
+  cards,
+  selectedCard,
+  setSelectedCard,
+}: CardDropdownProps) {
   return (
     <div className="w-full max-w-sm">
       <Listbox value={selectedCard} onChange={setSelectedCard}>
@@ -17,7 +29,7 @@ export default function CardDropdown({ cards, selectedCard, setSelectedCard }: a
             >
               <span className="block truncate">
                 {selectedCard
-                  ? cards.find((c: any) => c.id === selectedCard)?.name
+                  ? cards.find((c) => c.id === selectedCard)?.name
                   : 'Select a card'}
               </span>
               <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
@@ -35,7 +47,7 @@ export default function CardDropdown({ cards, selectedCard, setSelectedCard }: a
                   className="absolute mt-2 w-full z-10 rounded-lg bg-gray-900 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 >
                   <ListboxOptions className="max-h-60 overflow-auto py-2 text-sm">
-                    {cards.map((card: any) => (
+                    {cards.map((card) => (
                       <ListboxOption
                         key={card.id}
                         value={card.id}
@@ -55,13 +67,14 @@ export default function CardDropdown({ cards, selectedCard, setSelectedCard }: a
                               >
                                 {card.name}
                               </span>
+
                               <span className="text-xs text-gray-400">
                                 ATK {card.attack ?? '—'} / DEF {card.defense ?? '—'} —{' '}
                                 <span className="capitalize">{card.rarity}</span>
                               </span>
                             </div>
 
-                            {selected ? (
+                            {selected && (
                               <span
                                 className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
                                   active ? 'text-white' : 'text-gray-300'
@@ -69,7 +82,7 @@ export default function CardDropdown({ cards, selectedCard, setSelectedCard }: a
                               >
                                 <Check className="h-4 w-4" />
                               </span>
-                            ) : null}
+                            )}
                           </>
                         )}
                       </ListboxOption>
