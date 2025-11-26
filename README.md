@@ -14,20 +14,24 @@ npm install
 
 Create a file named .env in the project root:
 
-(Make sure the path matches your local folder structure.)
-Example:
+Place inside of it:
 DATABASE_URL="file:./prisma/dev.db"
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+Make sure the path matches your local folder structure (It probably will).
 
 
 ## 🔧 3. Generate the Prisma client
 
 npx prisma generate
+to be safe: npx prisma generate --schema=./prisma/schema.prisma
 
 
 ## 📊 5. Open Prisma Studio (optional)
 
 If you want a UI to view user data, cards, and user-card relations:
 npx prisma studio
+to be safe: npx prisma studio --schema=./prisma/schema.prisma
 
 
 ## ▶️ 6. Start the development server
@@ -36,7 +40,7 @@ npm run dev
 
 App will run at:
 http://localhost:3000
-(Currently http://localhost:3000/players/1)
+(Currently http://localhost:3000/player/1)
 
 
 
