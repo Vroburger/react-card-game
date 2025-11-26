@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Card Game Project – Setup Guide
 
-## Getting Started
+This project uses **Next.js (App Router)**, **Prisma**, and **SQLite**.  
+Follow these steps after cloning the repository to get everything working.
 
-First, run the development server:
 
-```bash
+## 🚀 1. Install dependencies
+
+Inside the terminal:
+npm install
+
+
+## 🗄️ 2. Create a .env file
+
+Create a file named .env in the project root:
+
+Place inside of it:
+DATABASE_URL="file:./prisma/dev.db"
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+Make sure the path matches your local folder structure (It probably will).
+
+
+## 🔧 3. Generate the Prisma client
+
+npx prisma generate
+to be safe: npx prisma generate --schema=./prisma/schema.prisma
+
+
+## 📊 5. Open Prisma Studio (optional)
+
+If you want a UI to view user data, cards, and user-card relations:
+npx prisma studio
+to be safe: npx prisma studio --schema=./prisma/schema.prisma
+
+
+## ▶️ 6. Start the development server
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+App will run at:
+http://localhost:3000
+(Currently http://localhost:3000/player/1)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+_______________________________________________________________________________________________________________________________________________________
 
-To learn more about Next.js, take a look at the following resources:
+Guide for if prisma has corruption/errors (can happen when changing up the schema):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Press Win + R and type %LOCALAPPDATA%
+   
+2. Delete each prisma folder, located under:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+C:\Users\<your-name>\AppData\Local
+and
+C:\Users\<your-name>\AppData\Roaming.
 
-## Deploy on Vercel
+3. Delete node_modules with:
+   
+Remove-Item -Recurse -Force node_modules
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Try each of these until 1 of them works (the terminal will display an X if it doesn't work):
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Remove-Item package-lock.json -ErrorAction SilentlyContinue
+Remove-Item yarn.lock -ErrorAction SilentlyContinue
+Remove-Item pnpm-lock.yaml -ErrorAction SilentlyContinue
+
+5. Reinstall dependencies:
+
+npm install
+
+6. Regenerate prisma client (with explicit schema path as a failsafe):
+
+npx prisma generate --schema=./prisma/schema.prisma
+
+7. Open prisma studio (with explicit schema path as a failsafe) - use this to open prisma studio whenever possible anyway:
+
+npx prisma studio --schema=./prisma/schema.prisma
+
+
+
+_______________________________________________________________________________________________________________________________________________________
+
+
